@@ -7,6 +7,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
+import ContactFormScreen from '../screens/ContactFormScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -60,6 +61,11 @@ function TabOneNavigator() {
         name="TabOneScreen"
         component={TabOneScreen}
         options={{ headerTitle: 'QR Generate' }}
+      />
+      <TabOneStack.Screen
+        name="ContactForm"
+        component={ContactFormScreen}
+        options={{ headerTitle: 'QR Contact' }}
       />
     </TabOneStack.Navigator>
   );

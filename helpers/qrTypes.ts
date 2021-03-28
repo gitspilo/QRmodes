@@ -1,7 +1,7 @@
 export const qrTypes = [
   {
     title: 'Contact',
-    nav: 'Scan',
+    nav: 'ContactForm',
     key: '1',
   },
   {

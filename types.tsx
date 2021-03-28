@@ -11,6 +11,7 @@ export type BottomTabParamList = {
 
 export type TabOneParamList = {
   TabOneScreen: undefined;
+  ContactForm: undefined;
 };
 
 export type TabTwoParamList = {
