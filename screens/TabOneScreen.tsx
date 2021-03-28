@@ -1,32 +1,60 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableNativeFeedback, Text } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+import { StackNavigationProp } from "@react-navigation/stack";
+import { Ionicons } from '@expo/vector-icons';
+import { qrTypes } from '../helpers/qrTypes';
+import { MonoText } from '../components/StyledText';
+import { TabOneParamList } from '../types';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+interface Props {
+  navigation: StackNavigationProp<TabOneParamList, "TabOneScreen">;
+}
 
-export default function TabOneScreen() {
+export default function TabOneScreen({ navigation }: Props) {
+  const renderItem = ({ item }: any) => (
+    <TouchableNativeFeedback
+      onPress={() => navigation.navigate(item.nav)}
+    >
+      <View style={styles.item}>
+        <View>
+          <MonoText style={styles.title}>{item.title}</MonoText>
+        </View>
+        <View>
+          <Ionicons name="arrow-forward-circle-outline" size={34} color="black" />
+        </View>
+      </View>
+    </TouchableNativeFeedback>
+  );
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
+    <SafeAreaView>
+      <FlatList
+        data={qrTypes}
+        renderItem={renderItem}
+        keyExtractor={item => item.key}
+        contentContainerStyle={styles.container}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    padding: 5,
+  },
+  item: {
     flex: 1,
+    flexDirection: 'row',
+    padding: 15,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 5,
+    marginBottom: 10,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    fontSize: 24,
+    fontWeight: '800',
   },
 });
