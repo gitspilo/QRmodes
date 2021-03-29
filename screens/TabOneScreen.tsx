@@ -4,7 +4,6 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Ionicons } from '@expo/vector-icons';
 import { qrTypes } from '../helpers/qrTypes';
-import { MonoText } from '../components/StyledText';
 import { TabOneParamList } from '../types';
 
 interface Props {
@@ -18,7 +17,7 @@ export default function TabOneScreen({ navigation }: Props) {
     >
       <View style={styles.item}>
         <View>
-          <MonoText style={styles.title}>{item.title}</MonoText>
+          <Text style={styles.title}>{item.title}</Text>
         </View>
         <View>
           <Ionicons name="arrow-forward-circle-outline" size={34} color="black" />

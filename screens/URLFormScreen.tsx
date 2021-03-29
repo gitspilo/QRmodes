@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { Button } from 'react-native-paper';
 import  queryString from 'query-string';
 import { Field } from '../components/Field';
-import { PhoneField } from '../components/PhoneField';
 import { CodeTypeEnum } from '../models/code';
 import { TabOneParamList } from '../types';
 
@@ -15,32 +14,26 @@ interface Props {
   navigation: StackNavigationProp<TabOneParamList, "TabOneScreen">;
 }
 
-export default function ContactForm({ navigation }: Props) {
+export default function URLFormScreen({ navigation }: Props) {
   return (
     <SafeAreaView>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
-          phoneNumber: '',
-          email: '',
-          company: '',
+          website: '',
+          url: '',
         }}
         validationSchema={schema}
         onSubmit={values => {
           navigation.navigate('QrGenerator', {
-            value: `contact?${queryString.stringify(values, { skipEmptyString: true})}`,
-            type: CodeTypeEnum.contact
+            value: `url?${queryString.stringify(values, { skipEmptyString: true})}`,
+            type: CodeTypeEnum.url,
           });
         }}
       >
         {({ handleSubmit }) => (
           <View style={styles.container}>
-            <Field name="firstName" label="First name"/>
-            <Field name="lastName" label="Last Name" />
-            <PhoneField name="phoneNumber" label="Phone Number" keyboardType="number-pad" />
-            <Field name="email" label="Email" keyboardType="email-address" />
-            <Field name="company" label="Company" />
+            <Field name="website" label="Website Name" />
+            <Field name="url" label="URL" multiline numberOfLines={4} />
             <Button
               mode="contained"
               onPress={handleSubmit}
@@ -66,20 +59,9 @@ const styles = StyleSheet.create({
 });
 
 const schema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
+  website: Yup.string()
     .required('Required'),
-  lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
-    .required('Required'),
-  email: Yup.string()
-    .email('Invalid email')
-    .optional(),
-  company: Yup.string().optional(),
-  phoneNumber: Yup.string()
-    .min(10, 'Too Short!')
-    .max(10, 'Too Long!')
+  url: Yup.string()
+    .url()
     .required('Required'),
 });

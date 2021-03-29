@@ -6,12 +6,12 @@ export const qrTypes = [
   },
   {
     title: 'URL',
-    nav: 'Scan',
+    nav: 'URLForm',
     key: '2',
   },
   {
     title: 'Text',
-    nav: 'Scan',
+    nav: 'TextForm',
     key: '3',
   }
 ];

@@ -1,24 +1,30 @@
 import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import ContactFormScreen from '../screens/ContactFormScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
+import URLFormScreen from '../screens/URLFormScreen';
+import TextFormScreen from '../screens/TextFormScreen';
+import QrGeneratorScreen from '../screens/QrGeneratorScreen';
+import {
+  BottomTabParamList,
+  TabOneParamList,
+  TabTwoParamList,
+  TabThreeParamList
+} from '../types';
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Generate"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      activeColor="#f0edf6"
+      inactiveColor="#3e2465"
+    >
       <BottomTab.Screen
         name="Generate"
         component={TabOneNavigator}
@@ -47,7 +53,7 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} {...props} />;
+  return <Ionicons size={26} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -66,6 +72,21 @@ function TabOneNavigator() {
         name="ContactForm"
         component={ContactFormScreen}
         options={{ headerTitle: 'QR Contact' }}
+      />
+      <TabOneStack.Screen
+        name="URLForm"
+        component={URLFormScreen}
+        options={{ headerTitle: 'QR URL' }}
+      />
+      <TabOneStack.Screen
+        name="TextForm"
+        component={TextFormScreen}
+        options={{ headerTitle: 'QR Text' }}
+      />
+      <TabOneStack.Screen
+        name="QrGenerator"
+        component={QrGeneratorScreen}
+        options={{ headerTitle: 'QR' }}
       />
     </TabOneStack.Navigator>
   );

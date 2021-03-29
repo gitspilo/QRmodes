@@ -1,3 +1,5 @@
+import { CodeTypeEnum } from './models/code';
+
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
@@ -6,12 +8,18 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
   Generate: undefined;
   Scan: undefined;
-  List: undefined;
+  // List: undefined;
 };
 
 export type TabOneParamList = {
   TabOneScreen: undefined;
   ContactForm: undefined;
+  URLForm: undefined;
+  TextForm: undefined;
+  QrGenerator: {
+    value: string;
+    type: CodeTypeEnum;
+  };
 };
 
 export type TabTwoParamList = {
